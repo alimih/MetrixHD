@@ -566,10 +566,10 @@
 				<convert type="EventName">Name</convert>
 			</widget>
 			<widget backgroundColor="layer-a-background" foregroundColor="layer-a-foreground" font="Regular; 21" halign="right" position="82,159" render="Label" size="537,317" source="session.Event_Now" transparent="1" zPosition="1">
-				<convert type="EventName">ExtendedDescription</convert>
+				<convert type="EventName">FullDescription</convert>
 			</widget>
 			<widget backgroundColor="layer-b-background" foregroundColor="layer-b-foreground" font="Regular; 20" halign="left" position="640,187" render="Label" size="560,266" source="session.Event_Next" transparent="1" zPosition="1">
-				<convert type="EventName">ExtendedDescription</convert>
+				<convert type="EventName">FullDescription</convert>
 			</widget>
 			<eLabel backgroundColor="layer-a-background" name="NowBG" position="65,148" size="565,376" zPosition="-1"/>
 			<eLabel backgroundColor="layer-b-background" name="NextBG" position="630,174" size="585,329"/>
@@ -624,6 +624,20 @@
 				<convert type="ClockToText">Format:%A</convert>
 			</widget>
 			<!--ClockWidget */-->
+		</screen>
+		<screen name="MENU_template">
+			<eLabel position="645,51" zPosition="-11" size="482,565" backgroundColor="layer-a-background" foregroundColor="layer-a-background" />
+			<eLabel position="264,51" zPosition="-1" size="340,320" backgroundColor="layer-a-background" transparent="0" />
+			<widget source="title" render="Label" position="20,552" size="1273,296" font="SetrixHD; 150" transparent="1" foregroundColor="background-text" valign="top" zPosition="-50" />
+			<widget source="menu" render="Listbox" position="636,60" size="499,555" scrollbarMode="showNever" enableWrapAround="1" transparent="1">
+				<convert type="TemplatedMultiContent">
+					{"template": [ MultiContentEntryText(pos = (30, 5), size = (490, 50), flags = RT_HALIGN_LEFT, text = 0) ],
+					"fonts": [gFont("SetrixHD", 30)],
+					"itemHeight": 60
+					}
+				</convert>
+			</widget>
+			<panel name="MENUCLOCKWIDGET_screen_pos265_410_size_340_70" />
 		</screen>
 
 	<!-- TEMPLATES */-->
