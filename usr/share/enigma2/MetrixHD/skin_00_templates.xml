@@ -139,6 +139,10 @@
 		<screen name="__e-buttons_template1">
 			<ePixmap position="1140,600" size="81,40" zPosition="10" pixmap="MetrixHD/buttons/key_exit.png" transparent="1" alphatest="blend" />
 		</screen>
+		<screen name="_oe-buttons_template1">
+			<ePixmap position="1045,600" size="81,40" zPosition="10" pixmap="MetrixHD/buttons/ok.png" transparent="1" alphatest="blend" />
+			<ePixmap position="1140,600" size="81,40" zPosition="10" pixmap="MetrixHD/buttons/key_exit.png" transparent="1" alphatest="blend" />
+		</screen>
 			<!-- BUTTONS */ -->
 
 		<screen name="GRIDLINES">
@@ -317,7 +321,7 @@
 		</screen>
 		<screen name="INFOBARCHANNELNAME">
 			<!--/* CHANNEL NAME -->
-			<widget font="SetrixHD;80" foregroundColor="background-text" noWrap="1" position="35,470" render="Label" size="1252,90" source="session.CurrentService" transparent="1" valign="center" zPosition="-30">
+			<widget font="SetrixHD;80" foregroundColor="background-text" noWrap="1" position="35,455" render="Label" size="1252,105" source="session.CurrentService" transparent="1" valign="center" zPosition="-30">
 				<convert type="MetrixHDExtServiceInfo">ServiceNumberAndName</convert>
 			</widget>
 			<!-- CHANNEL NAME */-->
@@ -569,16 +573,16 @@
 		</screen>
 		<screen name="INFOBAREPGWIDGET">
 			<!--/* EPGWidget -->
-			<widget backgroundColor="layer-a-background" foregroundColor="layer-a-foreground" font="Regular; 24" halign="right" noWrap="1" position="83,491" render="Label" size="535,33" source="session.Event_Now" transparent="1" valign="bottom" zPosition="2">
+			<widget backgroundColor="layer-a-background" foregroundColor="layer-a-foreground" font="Regular; 24" halign="right" noWrap="1" position="83,491" render="Label" size="535,33" source="session.Event_Now" transparent="0" valign="bottom" zPosition="2">
 				<convert type="EventName">Name</convert>
 			</widget>
-			<widget backgroundColor="layer-b-background" foregroundColor="layer-b-foreground" font="Regular; 23" halign="left" position="640,470" render="Label" size="560,33" source="session.Event_Next" transparent="1" valign="bottom" zPosition="2">
+			<widget backgroundColor="layer-b-background" foregroundColor="layer-b-foreground" font="Regular; 23" halign="left" position="640,470" render="Label" size="560,33" source="session.Event_Next" transparent="0" valign="bottom" zPosition="2">
 				<convert type="EventName">Name</convert>
 			</widget>
-			<widget backgroundColor="layer-a-background" foregroundColor="layer-a-foreground" font="Regular; 21" halign="right" position="82,159" render="Label" size="537,317" source="session.Event_Now" transparent="1" zPosition="1">
+			<widget backgroundColor="layer-a-background" foregroundColor="layer-a-foreground" font="Regular; 21" halign="right" position="82,159" render="Label" size="537,317" source="session.Event_Now" transparent="0" zPosition="1">
 				<convert type="EventName">FullDescription</convert>
 			</widget>
-			<widget backgroundColor="layer-b-background" foregroundColor="layer-b-foreground" font="Regular; 20" halign="left" position="640,187" render="Label" size="560,266" source="session.Event_Next" transparent="1" zPosition="1">
+			<widget backgroundColor="layer-b-background" foregroundColor="layer-b-foreground" font="Regular; 20" halign="left" position="640,187" render="Label" size="560,266" source="session.Event_Next" transparent="0" zPosition="1">
 				<convert type="EventName">FullDescription</convert>
 			</widget>
 			<eLabel backgroundColor="layer-a-background" name="NowBG" position="65,148" size="565,376" zPosition="-1"/>
