@@ -20,10 +20,9 @@
 #######################################################################
 
 from Components.Language import language
-from Tools.Directories import resolveFilename, SCOPE_LANGUAGE, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigNumber, ConfigYesNo, ConfigText
 import gettext
-from os import environ
 
 #############################################################
 
@@ -61,6 +60,10 @@ SKIN_SECOND_INFOBAR_SOURCE = "/usr/share/enigma2/MetrixHD/skin_00b_SecondInfoBar
 SKIN_SECOND_INFOBAR_TARGET = "/usr/share/enigma2/MetrixHD/skin_00b_SecondInfoBar.MySkin.xml"
 SKIN_SECOND_INFOBAR_TARGET_TMP = SKIN_SECOND_INFOBAR_TARGET + ".tmp"
 
+SKIN_CHANNEL_SELECTION_SOURCE = "/usr/share/enigma2/MetrixHD/skin_00e_ChannelSelection.xml"
+SKIN_CHANNEL_SELECTION_TARGET = "/usr/share/enigma2/MetrixHD/skin_00e_ChannelSelection.MySkin.xml"
+SKIN_CHANNEL_SELECTION_TARGET_TMP = SKIN_CHANNEL_SELECTION_TARGET + ".tmp"
+
 #############################################################
 
 COLOR_IMAGE_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/MyMetrixLite/images/%s.png"
@@ -75,6 +78,7 @@ def initColorsConfig():
         ("911D10", _("Crimson")),
         ("1BA1E2", _("Cyan")),
         ("00008B", _("Darkblue")),
+        ("0F0F0F", _("Darkgrey")),
         ("A61D4D", _("Magenta")),
         ("A4C400", _("Lime")),
         ("6A00FF", _("Indigo")),
@@ -87,6 +91,7 @@ def initColorsConfig():
         ("C3461B", _("Orange")),
         ("F472D0", _("Pink")),
         ("E51400", _("Red")),
+        ("27408B", _("Royal Blue")),
         ("7A3B3F", _("Sienna")),
         ("647687", _("Steel")),
         ("149BAF", _("Teal")),
@@ -130,21 +135,21 @@ def initColorsConfig():
     config.plugins.MyMetrixLiteColors.backgroundtext = ConfigSelection(default="FFFFFF", choices = ColorList)
     config.plugins.MyMetrixLiteColors.backgroundtexttransparency = ConfigSelection(default="80", choices = TransparencyList)
 
-    config.plugins.MyMetrixLiteColors.layerabackground = ConfigSelection(default="1C1C1C", choices = ColorList)
+    config.plugins.MyMetrixLiteColors.layerabackground = ConfigSelection(default="0F0F0F", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layerabackgroundtransparency = ConfigSelection(default="1A", choices = TransparencyList)
     config.plugins.MyMetrixLiteColors.layeraforeground = ConfigSelection(default="FFFFFF", choices = ColorList)
-    config.plugins.MyMetrixLiteColors.layeraselectionbackground = ConfigSelection(default="0050EF", choices = ColorList)
+    config.plugins.MyMetrixLiteColors.layeraselectionbackground = ConfigSelection(default="27408B", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layeraselectionbackgroundtransparency = ConfigSelection(default="1A", choices = TransparencyList)
     config.plugins.MyMetrixLiteColors.layeraselectionforeground = ConfigSelection(default="FFFFFF", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layeraaccent1 = ConfigSelection(default="BDBDBD", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layeraaccent2 = ConfigSelection(default="6E6E6E", choices = ColorList)
-    config.plugins.MyMetrixLiteColors.layeraprogress = ConfigSelection(default="0050EF", choices = ColorList)
+    config.plugins.MyMetrixLiteColors.layeraprogress = ConfigSelection(default="27408B", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layeraprogresstransparency = ConfigSelection(default="1A", choices = TransparencyList)
 
-    config.plugins.MyMetrixLiteColors.layerbbackground = ConfigSelection(default="0050EF", choices = ColorList)
+    config.plugins.MyMetrixLiteColors.layerbbackground = ConfigSelection(default="27408B", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layerbbackgroundtransparency = ConfigSelection(default="1A", choices = TransparencyList)
     config.plugins.MyMetrixLiteColors.layerbforeground = ConfigSelection(default="FFFFFF", choices = ColorList)
-    config.plugins.MyMetrixLiteColors.layerbselectionbackground = ConfigSelection(default="1C1C1C", choices = ColorList)
+    config.plugins.MyMetrixLiteColors.layerbselectionbackground = ConfigSelection(default="0F0F0F", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layerbselectionbackgroundtransparency = ConfigSelection(default="1A", choices = TransparencyList)
     config.plugins.MyMetrixLiteColors.layerbselectionforeground = ConfigSelection(default="FFFFFF", choices = ColorList)
     config.plugins.MyMetrixLiteColors.layerbaccent1 = ConfigSelection(default="BDBDBD", choices = ColorList)
@@ -188,14 +193,45 @@ def initWeatherConfig():
 #######################################################################
 
 def initOtherConfig():
+    channelSelectionStyleList = [
+        ("CHANNELSELECTION-1", _("Focus left, no picon, 5 next Events")),
+        ("CHANNELSELECTION-2", _("Focus left, big picon, 1 next Events")),
+        ("CHANNELSELECTION-3", _("Focus right, big picon, 1 next Events")),
+        ("CHANNELSELECTION-4", _("Focus right, no picon, 5 next Events"))
+        ]
+
+    infoBarChannelNameFontSizeList = [
+        ("INFOBARCHANNELNAME-1", _("80")),
+        ("INFOBARCHANNELNAME-2", _("70")),
+        ("INFOBARCHANNELNAME-3", _("60")),
+        ("INFOBARCHANNELNAME-4", _("50")),
+        ("INFOBARCHANNELNAME-5", _("40"))
+        ]
+
     config.plugins.MyMetrixLiteOther = ConfigSubsection()
 
     #OtherSettings
 
     config.plugins.MyMetrixLiteOther.showInfoBarServiceIcons = ConfigYesNo(default=True)
-    config.plugins.MyMetrixLiteOther.showInfoBarChannelName = ConfigYesNo(default=True)
+    config.plugins.MyMetrixLiteOther.showChannelNumber = ConfigYesNo(default=True)
+    config.plugins.MyMetrixLiteOther.showChannelName = ConfigYesNo(default=True)
+    config.plugins.MyMetrixLiteOther.infoBarChannelNameFontSize = ConfigSelection(default="INFOBARCHANNELNAME-1", choices = infoBarChannelNameFontSizeList)
     config.plugins.MyMetrixLiteOther.showInfoBarResolution = ConfigYesNo(default=True)
     config.plugins.MyMetrixLiteOther.showInfoBarClock = ConfigYesNo(default=True)
+    
+    config.plugins.MyMetrixLiteOther.channelSelectionStyle = ConfigSelection(default="CHANNELSELECTION-1", choices = channelSelectionStyleList)
+
+#######################################################################
+
+def getTunerPositionList():
+    tunerPositionList = [
+        ("286,666", "286,693", "1", "0,0"),
+        ("306,666", "306,693", "2", "1,1"),
+        ("326,666", "326,693", "4", "2,2"),
+        ("346,666", "346,693", "8", "3,3")
+    ]
+
+    return tunerPositionList
 
 #######################################################################
 
